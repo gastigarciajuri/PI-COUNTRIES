@@ -2,10 +2,10 @@ import React from 'react';
 import styles from "./CardAct.module.css"
 
 
-const Card = (activity) => {
+const CardAct = (activity) => {
 
     return (
-        <div>
+        <div className={styles.card}>
             {activity && (
             <div>    
             <p className={styles.p}><strong>Actividad: </strong>{activity.name}</p>
@@ -18,4 +18,4 @@ const Card = (activity) => {
     );
 };
 
-export default Card;
+export default CardAct;

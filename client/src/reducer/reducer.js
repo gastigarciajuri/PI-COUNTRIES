@@ -78,36 +78,22 @@ export default function RootReducer(state = initialState, action){
                     countries: orderPop
             }     
         case FILTER_ACTIVITY:
-            const allCountry2 = state.allCountries;
-            const solo = allCountry2.filter((pais) => {
-                return pais.activities.length > 0
-            });
-            let arr = [];
-            
-            for (let i = 0; i < solo.length; i++) {
-                for (let j = 0; j < solo[i].activities.length; j++) {
-                    if(solo[i].activities[j].name === action.payload){
-                        arr.push(solo[i])
-                    }
+            const allCountriesAct = state.allCountries
+            if(action.payload === 'All'){
+                return{
+                    ...state,
+                    countries: allCountriesAct
                 }
-                
+            } else{
+                let filterCountry = []
+                filterCountry = allCountriesAct.filter(country => 
+                    country.activities && country.activities.map(el => el.name).includes(action.payload))
+                return{
+                        ...state,
+                        countries: filterCountry
+                    }     
             }
-            const filtro = action.payload === "all" ? allCountry2 : arr
-            return {
-                ...state,
-                countries: filtro
-            }
-
-        // const allCountriesAct = state.allCountries
-            // const activitiesFilter = action.payload === 'All' ?
-            // allCountriesAct : allCountriesAct.filter(country => 
-            //     country.activities && country.activities.map(el => el.name).includes(action.payload))
-
-            // return{
-            //     ...state,
-            //     countries: activitiesFilter
-            // }     
         default :
         return state;
-        }
+    }
 }

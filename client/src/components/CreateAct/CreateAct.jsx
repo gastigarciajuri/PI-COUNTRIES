@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCountries, postActivity } from '../../actions/action.js'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router'
+import styles from "./CreateAct.module.css"
 
 export default function CreateAct(){
     const dispatch = useDispatch();
@@ -71,34 +72,34 @@ export default function CreateAct(){
         }
     }
 
-    function handleDelete(e){
-        setInput({
-            ...input,
-            //filtrar todo el array, devolviendo los paises que no coincidan con el seleccionado
-            countries: input.countries.filter(country => country !== e)
-        })
-    }
+    // function handleDelete(e){
+    //     setInput({
+    //         ...input,
+    //         //filtrar todo el array, devolviendo los paises que no coincidan con el seleccionado
+    //         countries: input.countries.filter(country => country !== e)
+    //     })
+    // }
 
     useEffect(() =>{
         dispatch(getCountries('ASC'))
     }, [dispatch])
 
     return (
-        <div>
-            <div>
+        <div className={styles.div}>
+            <div className={styles.div}>
                 <Link to='/home'>
-                    <button>VOLVER 🔙</button>
+                    <button className={styles.btn}>VOLVER 🔙</button>
                 </Link>
             </div>
-            <h1> ➕ CREAR ACTIVIDAD ➕</h1>
+            <h1 className={styles.h1}> ➕ CREAR ACTIVIDAD ➕</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 
-                    
+                    <div className={styles.div}>
                         <label>Nombre: </label>
                         <input type="text" value={input.name} name='name' onChange={handleChange} />
                         {errors.name && (<p>{errors.name}</p>)}
-                    
-                    
+                    </div>
+                    <div className={styles.div}>
                     <label>Dificultad: </label>
                     <label>
                     <input type="radio" value='1' name='dificult' onChange={(e) => handleCheckDif(e)}/>
@@ -120,13 +121,13 @@ export default function CreateAct(){
                     <input type="radio" value='5' name='dificult' onChange={(e) => handleCheckDif(e)}/>
                     5
                     </label>
-                    
-                    <div className='container'>
+                    </div>
+                    <div className={styles.div}>
                         <label>Duracion:  </label>
                         <input type="text" value={input.lasting} name='lasting' onChange={handleChange}/>
                         {errors.lasting && (<p>{errors.lasting}</p>)}
                     </div>
-                    <div className='container'>
+                    <div className={styles.div}>
                         <label>Temporada:  </label>
                         <label>
                             <input type="radio" value='Verano' name='season' onChange={(e) => handleCheck(e)} />
@@ -146,7 +147,7 @@ export default function CreateAct(){
                         </label>
                         {errors.season && (<p>{errors.season}</p>)}                    
                     </div>
-                    <div className='container'>
+                    <div className={styles.div}>
                         <label>Paises donde se realiza la actividad:  </label>
                         <div>
                             <select onChange={(e)=> handleSelect(e)}>
@@ -167,7 +168,6 @@ export default function CreateAct(){
                     </div>
                     )}  */}
                     <input type='submit' value="CREAR ACTIVIDAD" />
-                
             </form>
         </div>
     )

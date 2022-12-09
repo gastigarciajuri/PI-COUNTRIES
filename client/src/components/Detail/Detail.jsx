@@ -19,19 +19,22 @@ const Detail = () => {
         <div>
         <div>
             <Link to="/home/">
-            <button>Volver</button>
+            <button className={styles.btn}>Volver</button>
             </Link>
         </div>
-        <img src={country.imgflag}  alt={country.name} width="400px" height="250px"/>
-        <div>
-            <p className={styles.p}> <strong className={styles.strong}>País:</strong> {country.name} </p>
-            <p className={styles.p}> <strong className={styles.strong}>Capital: </strong> {country.capital} </p>
-            <p className={styles.p}> <strong className={styles.strong}>Subregión: </strong> {country.subregion} </p>
-            <p className={styles.p}> <strong className={styles.strong}>Área: </strong> {country.area} km2 </p>
-            <p className={styles.p}> <strong className={styles.strong}>Continente: </strong> {country.continent} </p>
-            <p className={styles.p}> <strong className={styles.strong}>Población: </strong> {country.population} habitantes </p>
+        <div className={styles.detail}>
+        <img src={country.imgflag}  alt={country.name} className={styles.img} width="400px" height="250px"/>
+        <ul>
+            <li className={styles.p}> <strong className={styles.strong}>País:</strong> {country.name} </li>
+            <li className={styles.p}> <strong className={styles.strong}>Capital: </strong> {country.capital} </li>
+            <li className={styles.p}> <strong className={styles.strong}>Subregión: </strong> {country.subregion} </li>
+            <li className={styles.p}> <strong className={styles.strong}>Área: </strong> {country.area} km2 </li>
+            <li className={styles.p}> <strong className={styles.strong}>Continente: </strong> {country.continent} </li>
+            <li className={styles.p}> <strong className={styles.strong}>Población: </strong> {country.population} habitantes </li>
+        </ul>
+        </div>
             <div>
-            <div className={styles.act}>
+            <div>
                 {
                 country.activities &&
                 country.activities.map((activity) => (
@@ -45,7 +48,7 @@ const Detail = () => {
             </div>
             </div>
         </div>
-        </div>
+        
     );
 };
 

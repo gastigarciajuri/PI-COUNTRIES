@@ -4,7 +4,7 @@ body {
   background: linear-gradient(0deg, rgba(23,71,68,1) 0%, rgba(0,63,105,1) 1%, rgba(6,61,15,1) 38%, rgba(2,9,46,0.9996170343137255) 100%);
   margin: 0;*/
   background-image: url("https://cdn.pixabay.com/photo/2017/06/17/10/55/hot-air-balloon-2411851_960_720.jpg");
-  background-size: contain;
+  background-size: cover;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

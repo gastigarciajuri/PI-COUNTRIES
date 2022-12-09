@@ -34,8 +34,8 @@ async function actiNueva(req, res){
 
 async function getAct(req, res) {
     try {
-            const activities = await Activity.findAll({  // get para el select en el front que ordena por actividades
-                include: Country  
+            const activities = await Activity.findAll({  
+                    include: Country  
                 })
                 return res.json(activities) 
     } catch (error) {

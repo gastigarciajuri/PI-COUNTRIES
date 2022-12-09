@@ -1,13 +1,44 @@
 .p{
-    color: #000000;
+    color: #ffffff;
     font-size: 1em;
     font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px;
+    text-decoration: none;
+    text-align: start;
+    display: block;
+    justify-content: flex-start;
+}
+.detail{
+    background-color: #031927;
+    border-radius: 15px;
+    display: flex;
+    
+}
+.btn {
+        margin-bottom: 4em;
+        border-radius: 28px;
+        text-decoration: none;
+        font-size: 2em;
+        font-family: 'Courier New', Courier, monospace;
+        float: inline-end;
+}
+.btn:hover{
+        transform: scaleZ(0.5);
+        color: rgb(25, 7, 94);
+        background-color: rgb(212, 203, 203);
 }
 
+
+.img{
+    border-radius: 15px;
+    size-adjust: auto;
+}
 .strong{
+    justify-content: flex-start;
     color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.5em;
+    text-align: start;
 }
 
 .act{

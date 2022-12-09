@@ -1,12 +1,16 @@
-.p{
-    color: #000000;
-    font-size: 1em;
-    font-family: 'Courier New', Courier, monospace;
-    margin-right: 2em;
+.btn{
+    background-color: rgba(117, 95, 95, 0.836);
+    border-radius: 15px;
+    color: black;
+    font-size: 25px;
+}
+.h1{
+    color: wheat;
 }
 
-.card{
-    display: inline-block;
+.div{
+    display: block;
+    height: 3em;
     justify-content: center;
     list-style: none;
     text-decoration: none;
@@ -18,4 +22,6 @@
     margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 45px;
+    border-style: solid;
+    border-color: black;
 }

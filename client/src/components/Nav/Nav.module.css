@@ -1,4 +1,18 @@
 .div{
-    background-color: aliceblue;
+    background-color: #031927;
     height: 1.5em;
+    text-decoration: none !important;
+    
+}
+
+.btn{
+    background-color: #508AA8;
+    border-radius: 15px;
+    color: white;
+}
+
+.input{
+    border-radius: 15px;
+    background-color: rgb(243, 230, 230);
+    color: black;
 }

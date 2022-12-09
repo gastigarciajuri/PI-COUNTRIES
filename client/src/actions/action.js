@@ -35,7 +35,7 @@ export function getAct(){
     return async function(dispatch){
         let json = await axios.get("http://localhost:3001/activity");
         return dispatch({
-            type: GET_ACTIVITY,
+            type: 'GET_ACTIVITY',
             payload: json.data
         })
     }

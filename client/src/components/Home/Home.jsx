@@ -7,7 +7,7 @@ import Card from '../Card/Card'
 import Paginado from "../Paginado/Paginado"
 import Nav from "../Nav/Nav";
 import styles from "./Home.module.css"
-import CardAct from "../CardAct/CardAct.jsx";
+
 function Home(){
     const dispatch = useDispatch();
 
@@ -15,18 +15,15 @@ function Home(){
     const allActivities = useSelector((state) => state.activities)
     console.log(allActivities)
     
-    //Mientras cargan...
-
-
-
     const [ currentPage, setCurrentPage ] = useState(1);
     const [ countryPage, setCountryPage ] = useState(9);
     const [ sortPop, setSortPop] = useState("")
     const [ order, setOrder ] = useState('');
     const lastCountry = currentPage * countryPage;
     const firstCountry = lastCountry - countryPage;
-    //divide el array por ctd necesaria..
-    const currentCountry = allCountries.slice(firstCountry, lastCountry);
+    const filteredCountries = allCountries;
+    const currentCountry = filteredCountries.slice(firstCountry, lastCountry);
+
 
     const paginado = (totalPages)=>{
         setCurrentPage(totalPages);
@@ -35,13 +32,8 @@ function Home(){
     useEffect(()=>{
         dispatch(getCountries(order));
         dispatch(getAct());
-    }, [dispatch])//si algun valor cambia, se vuelve a ejecutar
+    }, [dispatch])
 
-
-    // const changeOrder = (e) =>{
-    //     e.preventDefault()
-    //     setOrder(e.target.value)
-    // }
 
     function handleSortPopu(e){
         e.preventDefault();
@@ -65,38 +57,42 @@ function Home(){
 
     function handleFilterAct(e){
         e.preventDefault();
-        e.target.value !== "all" ? dispatch(getCountries()) : 
-        dispatch(filterByActivity(e.target.value))
+        e.target.value !== "All" ? dispatch(getCountries()) : 
+       // dispatch(filterByActivity(e.target.value))
+        filteredCountries = allCountries;
+        filteredCountries.filter( e => e.activities.name === e.target.value )
         setCurrentPage(1);
     }
 
 
     return (
-        <div className={styles.div}>
             <div className={styles.header}>
             <header >
                 <Link to='/'>
-                    <h1 className={styles.h1}>PAISES</h1>
+                    <h1 className={styles.paises}></h1>
                 </Link>
-                <div>
-                    <Link to='/activity'> CREAR ACTIVIDAD ➕</Link>
+                <div className={styles.div}>
+                    <div className={styles.act}>
+                    <Link style={{textDecoration: "none", fontSize: "20px", color: "white"}} to='/activity'> 
+                        CREAR ACTIVIDAD ➕
+                    </Link>
+                    </div>
                 </div>
             <Nav/>
             </header>
-        
-            <div>
             <div className={styles.div}>
-                <select onChange={ e => handleSortPopu(e)}>
+            <div className={styles.div}>
+                <select className={styles.select} onChange={ e => handleSortPopu(e)}>
                     <option>ORDENAR POR POBLACION</option>
                     <option value="desc">Menor a mayor ⬇️ - ⬆️</option>
                     <option value="asc">Mayor a menor ⬆️ - ⬇️</option>
                 </select>
-                <select onChange={e=> handleSort(e)}>
+                <select className={styles.select} onChange={e=> handleSort(e)}>
                     <option>ORDENAR POR NOMBRE</option>
                     <option value="asc">Ascendente ⬇️ - ⬆️</option>
                     <option value="desc">Descendente ⬆️ - ⬇️</option>
                 </select>
-                <select onChange={e => handleFilterContintent(e)}>
+                <select className={styles.select} onChange={e => handleFilterContintent(e)}>
                     <option value="All">Todos</option>
                     <option value="Africa">Africa  </option>
                     <option value="North America">America del Norte</option>
@@ -106,43 +102,23 @@ function Home(){
                     <option value="Europe">Europa</option>
                     <option value="Oceania">Oceania</option>
                 </select>
-                <div>
-                <select>
-                    <option>ACTIVIDADES</option>
-                    <option value="all">TODAS</option>
+                {/* <div className={styles.div}>
+                <select className={styles.select} onChange={e => handleFilterAct(e)}>
+                    <option className={styles.select} value="All">TODAS LAS ACTIVIDADES</option>
                     {
-                        (allActivities.length === 0)  ? <p>NO HAY ACTIVIDADES...</p> :
-                        <select onChange={e => handleFilterAct(e)}>
-                            <option value="none"></option>
-                        {
-                            allActivities.map(e => (
-                                <option value={e.name} key={e.id}>{e.name}</option>
+                            allActivities &&  allActivities.map(activity => (
+                                <option value={activity.name} key={activity.id}>{activity.name}</option>
                             ))
-                        }
-                        </select>
                     }
-                    
-                {/* <ul>
-                    {
-                        allActivities?.map(activity => (
-                                <CardAct
-                                    name={activity.name} 
-                                    dificult={activity.dificult} 
-                                    lasting={activity.lasting}
-                                    season={activity.season}
-                                />
-                ))}
-                </ul> */}
                 </select>
-                </div>
+                </div> */}
                 </div>
                 <Paginado
                         countryPage={countryPage}
                         allCountries={allCountries.length}
                         paginado={paginado}
                 />
-                    {/* Se hace el map sobre el nuevo array de countries, para renderizar solo los 
-            necesarios por pagina */}
+
                 {
                 <ul className={styles.p}>
                     {
@@ -161,7 +137,6 @@ function Home(){
                     }
                 </div>
             </div>
-        </div>
     )
 }
 

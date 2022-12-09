@@ -20,8 +20,8 @@ export default function Nav(){
     return (
         <form onSubmit={(event) => handleClick(event)}>
             <div className={styles.div}>
-                <input type="text" placeholder="BUSCAR PAIS..." onChange={(e) => handleInputChange(e)}/>
-                <button type="submit" >BUSCAR 🔎</button>
+                <input className={styles.input} type="text" placeholder="BUSCAR PAIS..." onChange={(e) => handleInputChange(e)}/>
+                <button className={styles.btn} type="submit" >BUSCAR 🔎</button>
             </div>
         </form>
     );

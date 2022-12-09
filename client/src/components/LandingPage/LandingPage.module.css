@@ -1,0 +1,19 @@
+
+.btn {
+    border-radius: 28px;
+    text-decoration: none;
+    font-size: 3em;
+    font-family: 'Courier New', Courier, monospace;
+    float: inline-end;
+}
+.btn:hover{
+    transform: scaleZ(0.5);
+    color: rgb(25, 7, 94);
+    background-color: rgb(212, 203, 203);
+}
+.h1{
+    color: antiquewhite;
+    margin-bottom: 5em;
+    border-radius: 10px;
+    background-color: grey;
+}
