@@ -1,0 +1,18 @@
+.p{
+    color: #000000;
+    font-size: 1em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.strong{
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+}
+
+.act{
+    background-color: #645757da;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}

@@ -1,0 +1,32 @@
+.paginado{
+    display: flex !important;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-left: 22vw;
+    padding: 20px;
+    width: 50vw;
+    height: 5vh;
+    gap: 0.3vw;
+}
+
+.number{
+    text-align: center;
+    list-style: none;
+    border: 1px solid #111111;
+    border-radius: 50%;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    background-color: #D2D6EF;
+}
+
+.a{
+    text-align: center;
+    color: #000000;
+    font-family: 'Verdana', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
