@@ -32,7 +32,6 @@ async function loadDb() {
         });
     });
     }
-    console.log("DB success");
 } catch (error) {
     console.log(error)
 }

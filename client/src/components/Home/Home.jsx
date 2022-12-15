@@ -57,10 +57,10 @@ function Home(){
 
     function handleFilterAct(e){
         e.preventDefault();
-        e.target.value !== "All" ? dispatch(getCountries()) : 
-       // dispatch(filterByActivity(e.target.value))
-        filteredCountries = allCountries;
-        filteredCountries.filter( e => e.activities.name === e.target.value )
+        dispatch(filterByActivity(e.target.value))
+        // filteredCountries = allCountries;
+        // filteredCountries.filter( e => e.activities.name === e.target.value )
+        // console.log(filteredCountries)
         setCurrentPage(1);
     }
 
@@ -102,7 +102,7 @@ function Home(){
                     <option value="Europe">Europa</option>
                     <option value="Oceania">Oceania</option>
                 </select>
-                {/* <div className={styles.div}>
+                <div className={styles.div}>
                 <select className={styles.select} onChange={e => handleFilterAct(e)}>
                     <option className={styles.select} value="All">TODAS LAS ACTIVIDADES</option>
                     {
@@ -111,7 +111,7 @@ function Home(){
                             ))
                     }
                 </select>
-                </div> */}
+                </div>
                 </div>
                 <Paginado
                         countryPage={countryPage}

@@ -71,26 +71,15 @@ export default function CreateAct(){
             })
         }
     }
-
-    // function handleDelete(e){
-    //     setInput({
-    //         ...input,
-    //         //filtrar todo el array, devolviendo los paises que no coincidan con el seleccionado
-    //         countries: input.countries.filter(country => country !== e)
-    //     })
-    // }
-
     useEffect(() =>{
         dispatch(getCountries('ASC'))
     }, [dispatch])
 
     return (
         <div className={styles.div}>
-            <div className={styles.div}>
                 <Link to='/home'>
                     <button className={styles.btn}>VOLVER 🔙</button>
                 </Link>
-            </div>
             <h1 className={styles.h1}> ➕ CREAR ACTIVIDAD ➕</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 
@@ -161,12 +150,6 @@ export default function CreateAct(){
                         </div>
                         {errors.id && (<p>{errors.id}</p>)}
                     </div>
-                    {/* {input.countries?.map((e) => 
-                    <div className='container'>
-                        <p>{e}</p>
-                        <button type='button' onClick={() => handleDelete(e)}> ✖️ </button>
-                    </div>
-                    )}  */}
                     <input type='submit' value="CREAR ACTIVIDAD" />
             </form>
         </div>

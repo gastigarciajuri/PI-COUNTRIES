@@ -4,7 +4,6 @@ const { Country, Activity } = require("../db");
 
 async function getAllPais(req, res){
     const { name } = req.query;
-
     try {
         if(!name){
             const allPais = await Country.findAll({ include: Activity });
@@ -18,9 +17,7 @@ async function getAllPais(req, res){
                 },
                 include: Activity
         });
-
             if(!queryPais[0]){
-                console.log("error")
                 return res.status(404).json({error: `No se encontro a ${name}`})
             }
             return res.send(queryPais)

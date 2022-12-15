@@ -21,8 +21,6 @@ async function actiNueva(req, res){
                 id: id,
             },
         });
-        // console.log("NEWACT",newAct)
-        // console.log("MATCHING",matching)
         const response = await newAct.addCountries(matching);
         return res.send(response)
     }
