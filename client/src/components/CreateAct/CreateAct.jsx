@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCountries, postActivity } from '../../actions/action.js'
-import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router'
+import { Link as RouterLink } from "react-router-dom";
 import styles from "./CreateAct.module.css"
+import { Input } from '@mui/material';
 
 export default function CreateAct(){
     const dispatch = useDispatch();
-    const history = useHistory();
     const countries = useSelector((state) => state.countries)
-    const [ errors , setErrors ] = useState({})
+    const [ errors  ] = useState({})
     const [input, setInput] = useState({
         name: '',
         dificult: '', 
@@ -77,9 +76,9 @@ export default function CreateAct(){
 
     return (
         <div className={styles.div}>
-                <Link to='/home'>
+                <RouterLink to='/home'>
                     <button className={styles.btn}>VOLVER 🔙</button>
-                </Link>
+                </RouterLink>
             <h1 className={styles.h1}> ➕ CREAR ACTIVIDAD ➕</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
                 
@@ -150,7 +149,9 @@ export default function CreateAct(){
                         </div>
                         {errors.id && (<p>{errors.id}</p>)}
                     </div>
-                    <input type='submit' value="CREAR ACTIVIDAD" />
+                    <RouterLink to='/home'>
+                        <Input type='submit' value="CREAR ACTIVIDAD" />
+                    </RouterLink>
             </form>
         </div>
     )

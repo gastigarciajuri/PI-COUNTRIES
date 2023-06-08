@@ -1,25 +1,30 @@
-import React from 'react'
-import styles from './paginado.module.css'
+import React from 'react';
+import { Pagination, styled } from '@mui/material';
 
-export default function Paginado({countryPage, allCountries, paginado}) {
+const StyledPagination = styled(Pagination)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  '& .MuiPaginationItem-textPrimary': {
+    color: 'white',
+  },
+}));
 
-    const pageNumbers = [];
+export default function Paginado({ countryPage, allCountries, paginado }) {
+  const pageCount = Math.ceil(allCountries / countryPage);
 
-        for (let i = 0; i <= Math.ceil(allCountries / countryPage); i++) {
-            pageNumbers.push(i);
-        }    
-    return (
-        <nav>
-            <ul className={styles.paginado}>
-                {
-                    pageNumbers && 
-                        pageNumbers.map( number => (
-                        <li className={styles.number} key={number}>
-                            <a className={styles.a} onClick={() => paginado(number)}>{number}</a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </nav>
-    )
+  const handlePageChange = (event, page) => {
+    paginado(page);
+  };
+
+  return (
+    <nav>
+      <StyledPagination
+        count={pageCount}
+        shape="rounded"
+        onChange={handlePageChange}
+      />
+    </nav>
+  );
 }

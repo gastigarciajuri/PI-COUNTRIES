@@ -8,6 +8,13 @@
     display: block;
     justify-content: flex-start;
 }
+.textContainer{
+    margin-top: -15em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column-reverse;
+}
 .detail{
     background-color: #031927;
     border-radius: 15px;
