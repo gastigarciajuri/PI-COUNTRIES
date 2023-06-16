@@ -5,13 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import CardAct from "../CardAct/CardAct";
 import { Link } from "react-router-dom";
 import {
-  Grid,
   Button,
   Typography,
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
   makeStyles,
 } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";

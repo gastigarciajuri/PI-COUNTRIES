@@ -11,8 +11,8 @@ const StyledPagination = styled(Pagination)(({ theme }) => ({
   },
 }));
 
-export default function Paginado({ countryPage, allCountries, paginado }) {
-  const pageCount = Math.ceil(allCountries / countryPage);
+export default function Paginado({ countryPage, allCountries, paginado, currentPage }) {
+  const pageCount = Math.ceil(allCountries / (currentPage === 1 ? 9 : 10));
 
   const handlePageChange = (event, page) => {
     paginado(page);
