@@ -1,28 +1,56 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getByName } from "../../actions/action.js";
-import styles from "./Nav.module.css"
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField, Button } from "@material-ui/core";
 
-export default function Nav(){
-    const dispatch = useDispatch();
-    const [ name, setName ] = useState("");
+const useStyles = makeStyles((theme) => ({
+  form: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: theme.spacing(2),
+  },
+  input: {
+    marginRight: theme.spacing(2),
+  },
+  btn: {
+    textTransform: "none",
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+}));
 
-    function handleInputChange(e){
-        e.preventDefault();
-        setName(e.target.value);
-    }
-    const handleClick = (event) => {
-        event.preventDefault();
-        //name seria el estado local
-        dispatch(getByName(name));
-        setName('')
-    };
-    return (
-        <form onSubmit={(event) => handleClick(event)}>
-            <div className={styles.div}>
-                <input className={styles.input} type="text" placeholder="BUSCAR PAIS..." onChange={(e) => handleInputChange(e)}/>
-                <button className={styles.btn} type="submit" >BUSCAR 🔎</button>
-            </div>
-        </form>
-    );
+export default function Nav() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+
+  const handleInputChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    dispatch(getByName(name));
+    setName("");
+  };
+
+  return (
+    <form onSubmit={handleClick} className={classes.form}>
+      <TextField
+        className={classes.input}
+        type="text"
+        placeholder="BUSCAR PAIS..."
+        value={name}
+        onChange={handleInputChange}
+      />
+      <Button className={classes.btn} type="submit">
+        BUSCAR
+      </Button>
+    </form>
+  );
 }

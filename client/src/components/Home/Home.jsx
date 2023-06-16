@@ -1,22 +1,56 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, oContintente, filterByActivity, getAct, ordenAlfa, filterPo } from '../../actions/action.js';
-import { Link as RouterLink } from "react-router-dom";
+import {
+  getCountries,
+  oContintente,
+  filterByActivity,
+  getAct,
+  ordenAlfa,
+  filterPo,
+} from "../../actions/action.js";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
 import CountryList from "../CountryList/CountryList.jsx";
-import Paginado from "../Paginado/Paginado.jsx"
+import Paginado from "../Paginado/Paginado.jsx";
 import Nav from "../Nav/Nav";
-import styles from "./Home.module.css";
+
+const useStyles = makeStyles((theme) => ({
+  header: {
+    textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
+  div: {
+    marginBottom: theme.spacing(2),
+  },
+  select: {
+    marginRight: theme.spacing(2),
+    background: "#224870",
+    color: "#000000",
+  },
+  createLink: {
+    textDecoration: "none",
+    fontSize: "20px",
+    color: "black",
+  },
+}));
 
 function Home() {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const allCountries = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [countryPage] = useState(9);
+  // const [countryPage] = useState(9);
   const [sortPop, setSortPop] = useState("");
-  const [order, setOrder] = useState('');
+  const [order, setOrder] = useState("");
   const [filterContinent, setFilterContinent] = useState("All");
   const [filterActivity, setFilterActivity] = useState("All");
 
@@ -25,9 +59,12 @@ function Home() {
     dispatch(getAct());
   }, [dispatch, order]);
 
+
   function getCurrentPageItems() {
-    const lastCountry = currentPage * countryPage;
-    const firstCountry = lastCountry - countryPage;
+    // const totalPages = Math.ceil(allCountries.length / (currentPage === 1 ? 9 : 10));
+    const lastCountryIndex = currentPage * (currentPage === 1 ? 9 : 10);
+    const firstCountryIndex = lastCountryIndex - (currentPage === 1 ? 9 : 10);
+    
     let filteredCountries = allCountries;
 
     // Aplicar filtros
@@ -50,7 +87,7 @@ function Home() {
       filteredCountries.sort((a, b) => a.population - b.population);
     }
 
-    return filteredCountries.slice(firstCountry, lastCountry);
+    return filteredCountries.slice(firstCountryIndex, lastCountryIndex);
   }
 
   function paginado(totalPages) {
@@ -88,59 +125,94 @@ function Home() {
   const currentCountry = getCurrentPageItems();
 
   return (
-    <div className={styles.header}>
-      <header>
-        <div className={styles.div}>
-          <div className={styles.act}>
-            <RouterLink style={{ textDecoration: "none", fontSize: "20px", color: "white" }} to='/activity'>
-              CREAR ACTIVIDAD ➕
-            </RouterLink>
-          </div>
-        </div>
+    <div>
+
         <Nav />
-      </header>
-      <div className={styles.div}>
-        <div className={styles.div}>
-          <select className={styles.select} onChange={(e) => handleSortPopu(e)}>
-            <option>ORDENAR POR POBLACION</option>
-            <option value="desc">Menor a mayor ⬇️ - ⬆️</option>
-            <option value="asc">Mayor a menor ⬆️ - ⬇️</option>
-          </select>
-          <select className={styles.select} onChange={(e) => handleSort(e)}>
-            <option>ORDENAR POR NOMBRE</option>
-            <option value="asc">Ascendente ⬇️ - ⬆️</option>
-            <option value="desc">Descendente ⬆️ - ⬇️</option>
-          </select>
-          <select className={styles.select} onChange={(e) => handleFilterContintent(e)}>
-            <option value="All">Todos</option>
-            <option value="Africa">Africa</option>
-            <option value="North America">America del Norte</option>
-            <option value="South America">America del Sur</option>
-            <option value="Antarctica">Antartica</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europa</option>
-            <option value="Oceania">Oceania</option>
-          </select>
-          <div className={styles.div}>
-            <select className={styles.select} onChange={(e) => handleFilterAct(e)}>
-              <option className={styles.select} value="All">TODAS LAS ACTIVIDADES</option>
+
+
+      <Grid container justify="center" className={classes.div}>
+        <Grid item xs={12} sm={6} md={3}>
+          <FormControl fullWidth variant="outlined" className={classes.select}>
+            <InputLabel>ORDENAR POR POBLACION</InputLabel>
+            <Select
+              value={sortPop}
+              onChange={handleSortPopu}
+              label="ORDENAR POR POBLACION"
+            >
+              <MenuItem value="">
+                <em>Ninguno</em>
+              </MenuItem>
+              <MenuItem value="desc">Menor a mayor ⬇️ - ⬆️</MenuItem>
+              <MenuItem value="asc">Mayor a menor ⬆️ - ⬇️</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <FormControl fullWidth variant="outlined" className={classes.select}>
+            <InputLabel>ORDENAR POR NOMBRE</InputLabel>
+            <Select
+              value={order}
+              onChange={handleSort}
+              label="ORDENAR POR NOMBRE"
+            >
+              <MenuItem value="">
+                <em>Ninguno</em>
+              </MenuItem>
+              <MenuItem value="asc">Ascendente ⬇️ - ⬆️</MenuItem>
+              <MenuItem value="desc">Descendente ⬆️ - ⬇️</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <FormControl fullWidth variant="outlined" className={classes.select}>
+            <InputLabel>TODOS LOS CONTINENTES</InputLabel>
+            <Select
+              value={filterContinent}
+              onChange={handleFilterContintent}
+              label="TODOS LOS CONTINENTES"
+            >
+              <MenuItem value="All">Todos</MenuItem>
+              <MenuItem value="Africa">Africa</MenuItem>
+              <MenuItem value="North America">America del Norte</MenuItem>
+              <MenuItem value="South America">America del Sur</MenuItem>
+              <MenuItem value="Antarctica">Antartica</MenuItem>
+              <MenuItem value="Asia">Asia</MenuItem>
+              <MenuItem value="Europe">Europa</MenuItem>
+              <MenuItem value="Oceania">Oceania</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <FormControl fullWidth variant="outlined" className={classes.select}>
+            <InputLabel>TODAS LAS ACTIVIDADES</InputLabel>
+            <Select
+              value={filterActivity}
+              onChange={handleFilterAct}
+              label="TODAS LAS ACTIVIDADES"
+            >
+              <MenuItem value="All">Todas las actividades</MenuItem>
               {allActivities &&
                 allActivities.map((activity) => (
-                  <option value={activity.name} key={activity.id}>
+                  <MenuItem value={activity.name} key={activity.id}>
                     {activity.name}
-                  </option>
+                  </MenuItem>
                 ))}
-            </select>
-          </div>
-        </div>
-        <Paginado
-          countryPage={countryPage}
-          allCountries={allCountries.length}
-          paginado={paginado}
-        />
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
 
-        <CountryList allCountries={currentCountry} />
-      </div>
+      <Paginado
+        countryPage={currentPage === 1 ? 9 : 10}
+        allCountries={allCountries.length}
+        paginado={paginado}
+        currentPage={currentPage}
+      />
+
+      <CountryList allCountries={currentCountry} />
     </div>
   );
 }
